@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    	<title>ekardnam - Luca Bertozzi</title>
+
+    	<link href="css/bootstrap.min.css" rel="stylesheet">
+    	<!--[if lt IE 9]>
+     		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    	<![endif]-->
+
+    	<style>
+    		
+    	</style>
+	</head>
+	<body>
+	    <div class="jumbotron" style="backgorund-image: url(file:///C:/Users/Luca/Documents/GitHub/ekardnam.github.io/background.png);" >
+	      <div class="container">
+	        <h1><span style="font-size: 70px;" >ekardnam</span></h1>
+	        <h2 style="font-size: 35px;" >Luca Bertozzi</h2>
+	      </div>
+	    </div>
+
+	    <div class="container">
+		    <div class="row">
+			    <div class="col-md-6">
+			        <h2><span class="glyphicon glyphicon-console" ></span> whoami</h2>
+			        <p>I'm a <span class="age" ></span>-years-old Italian guy. I'm interested in Science and Technology, in particular on GitHub I'll push my Computer Science and Electronics projects. I'm a big fan of Open Source and Free Software. I usually use Ubuntu or other GNU/Linux distributions</p>
+			    </div>
+			    <div class="col-md-6">
+			        <h2><span class="glyphicon glyphicon-console" ></span> cd contacts && ls -la</h2>
+			        <p>-rwxrw-r-- 1 ekardnam    ekardnam    4096 Nov 27 22:05 <a href="mailto:lucabertozzi.pub@gmail.com" >lucabertozzi.pub@gmail.com</a></p>
+			        <p>-rwxrw-r-- 1 ekardnam    ekardnam    4096 Nov 27 22:05 <a href="https://twitter.com/ekardnam_" >@ekardnam_ on Twitter</a></p>
+			    </div>
+	      	</div>
+	      	<br/>
+	      	<br/>
+	      	<br/>
+	      	<div class="row" >
+	      		<div class="col-md-4" ></div>
+	      		<div class="col-md-4" style="text-align: center;" >
+	      			<a href="https://github.com/ekardnam" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> GitHub</a>
+	      			<a href="https://twitter.com/ekardnam_" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> Twitter</a>
+	      		</div>
+	      	</div>
+	      <hr>
+
+	      <footer>
+	        <p>&copy; 2016 Luca Bertozzi</p>
+	      </footer>
+	    </div> 
+
+	    <script>
+    		var birthYear = 1999;
+    		var year = new Date().getFullYear();
+    		var elements = document.getElementsByClassName("age");
+    		for (var i = 0; i <  elements.length; i++) {
+    			elements[i].innerHTML = (year - birthYear);
+    		}
+    	</script>
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    	<script src="js/bootstrap.min.js"></script>
+	</body>
+</html>
