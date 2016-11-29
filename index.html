@@ -18,10 +18,10 @@
     	</style>
 	</head>
 	<body>
-	    <div class="jumbotron" style="backgorund-image: url(file:///C:/Users/Luca/Documents/GitHub/ekardnam.github.io/background.png);" >
+	    <div class="jumbotron" >
 	      <div class="container">
-	        <h1><span style="font-size: 70px;" >ekardnam</span></h1>
-	        <h2 style="font-size: 35px;" >Luca Bertozzi</h2>
+	        <h1><span style="font-size: 70px;" id="animation1" ><span style="visibility: hidden;" >A</span></span></h1>
+	        <h2><span style="font-size: 35px; opacity: 0;" id="animation2" >Luca Bertozzi</span></h2>
 	      </div>
 	    </div>
 
@@ -65,5 +65,53 @@
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     	<script src="js/bootstrap.min.js"></script>
+    	<script>
+    		//animations
+    		var animation1Text = "ekardnam";
+    		var animation1 = document.getElementById("animation1");
+    		var animation2 = document.getElementById("animation2");
+    		var i = 0;
+    		var c = true;
+    		var o  = 0;
+    		var s = 0.01;
+    		var writeWait = 200;
+    		var cursorWait = 500;
+    		var fadeWait = 10;
+    		var a1 = function() {
+    			if (i <= animation1Text.length) {
+    				animation1.innerHTML = animation1Text.substring(0, i) + "_";
+    				i++;
+    				window.setTimeout(a1, writeWait);
+    			} else {
+    				a2();
+    				b1();
+    			}
+    		}
+    		var b1 = function() {
+				if (c) {
+    				animation1.innerHTML = animation1Text + "_";
+    			} else {
+    				animation1.innerHTML = animation1Text;
+    				}
+    			c = !c;
+    			window.setTimeout(b1, cursorWait);
+    		}
+    		var a2 = function() {
+    			animation2.style.opacity = o;
+    			o += s;
+    			if (o < 1) {
+    				window.setTimeout(a2, fadeWait);
+    			}
+    		}
+    		window.setTimeout(a1, writeWait);
+
+    		//screen compatibility
+    		var screenW = screen.width;
+    		var screenH = screen.height;
+    		if (screenW <= 640) {
+    			animation1.style.fontSize = "50px";
+    			animation2.style.fontSize = "30px";
+    		}
+    	</script>
 	</body>
 </html>
