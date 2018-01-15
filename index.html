@@ -71,11 +71,11 @@
 			}
 			
 			.logo {
-				width: 15%;
+				width: 200px;
 				height: auto;
 				position: absolute;
-				right: 5%;
-				top: 20%;
+				right: 100px;
+				top: 100px;
 				border: .5em solid white;
 			}
 			
@@ -83,17 +83,67 @@
 				border-bottom: .5em solid white;
 			}
 			
+			.nick {
+				font-size: 70px;
+			}
+			
+			.name {
+				font-size: 35px;
+			}
+			
+			.language-selection {
+				position: absolute;
+				top: 10px;
+				right: 20px;
+			}
+			
+			.lang-button {
+				background-color: transparent;
+				border: .15em solid white;
+				color: white;
+			}
+			
+			.lang-button:hover {
+				background-color: white;
+				color: #66D696;
+			}
+			
+			.lang-button.active {
+				background-color: white;
+				color: #66D696;
+				box-shadow: none;
+			}
+			
 			a {
 				color: #66D696;
+			}
+			
+			@media only screen and (max-width: 768px) {
+				.logo {
+					display: none;
+					visibility: hidden;
+				}
+				
+				.nick {
+					font-size: 50px;
+				}
+				
+				.name {
+					font-size: 30px;
+				}
 			}
     	</style>
 	</head>
 	<body class="grey" >
 	    <div class="jumbotron green white-border" >
 	      <div class="container">
-	        <h1 style="font-size: 70px;" id="animate" ><span style="display: none;" >A</span></h1>
-	        <h2 style="font-size: 35px;" class="fade-in left" >Luca Bertozzi</h2>
+			<div class="language-selection">
+				<button class="btn lang-button" id="lang-english" onclick="set_lang(0);" >English</button>
+				<button class="btn lang-button" id="lang-italian" onclick="set_lang(1);" >Italian</button>
+			</div>
 			<img class="img-circle logo" src="logo.jpg"/>
+	        <h1 id="animate" class="nick" ><span style="display: none;" >A</span></h1>
+	        <h2 class="fade-in left name" >Luca Bertozzi</h2>
 	      </div>
 	    </div>
 
@@ -101,7 +151,8 @@
 		    <div class="row slide-in">
 			    <div class="col-md-6">
 			        <h2><span class="glyphicon glyphicon-console" ></span> whoami</h2>
-			        <p>I'm a <span class="age" ></span>-years-old Italian guy. I'm interested in Science and Technology, in particular on GitHub I'll push my Computer Science and Electronics projects. I'm a big fan of Open Source and Free Software. I usually use Ubuntu or other GNU/Linux distributions</p>
+			        <p class="english" >I'm a <span class="age" ></span>-years-old Italian guy. I'm interested in Science and Technology, in particular on GitHub I'll push my Computer Science and Electronics projects. Follow on GitHub to be updated about them. On Twitter I tweet stupid funny things about Tech, the dankest memes and a lot of other stuff that nobody cares about. Follow me there if you want to be updated also about that. I'm a big fan of Open Source and Free Software. I usually use Ubuntu or other GNU/Linux distributions</p>
+					<p class="italian" >Sono un <span class="age" ></span>enne Italiano. Mi interesso di Scienza e Tecnologia, in particolare su GitHub caricherò i miei progetti di Programmazione ed Elettronica. Seguimi su GitHub per aggiornamenti a riguardo. Su Twitter tweetto cose stupide e divertenti sulla Tecnologia, dank memes, e un sacco di altre cose di cui non frega niente a nessuno. Seguimi se vuoi saperne di più. Sono un grande appassionate di Open Source e Software Libero. Uso solitamente Ubuntu o altre distribuzioni GNU/Linux</p>
 			    </div>
 			    <div class="col-md-6">
 			        <h2><span class="glyphicon glyphicon-console" ></span> cd contacts && ls -la</h2>
@@ -110,8 +161,6 @@
 			    	<p>-rwxrw-r-- 1 ekardnam    ekardnam    4096 Jan 14 21:34 <a href="https://t.me/ekardnam">@ekardnam on Telegram!</a></p>
 			    </div>
 	      	</div>
-	      	<br/>
-	      	<br/>
 	      	<br/>
 	      	<div class="row slide-in" >
 	      		<div class="col-md-4" ></div>
@@ -166,6 +215,30 @@
     			}
     		}
 			
+			var languages = ["english", "italian"]
+			var language = 0;
+			
+			function set_lang(lang) {
+				language = lang;
+				update();
+			}
+			
+			function update() {
+				var buttons = document.getElementsByClassName("lang-button");
+				for (var l = 0; l < buttons.length; l++) {
+					buttons[l].classList.remove("active");
+				}
+				document.getElementById("lang-" + languages[language]).classList.add("active");
+				for (var j = 0; j < languages.length; j++) {
+					var objects = document.getElementsByClassName(languages[j]);
+					for (var k = 0; k < objects.length; k++) {
+						objects[k].style.display = (j == language) ? 'block' : 'none';
+						objects[k].style.visibility = (j == language) ? 'visible' : 'hidden';
+					}
+				}
+			}
+			
+			update();
 			animation();
     	</script>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
