@@ -14,73 +14,19 @@
     	<![endif]-->
 
     	<style>
-			@keyframes slide_from_bottom {
-				from {
-					transform: translateY(100%);
-					opacity: 0;
-				}
-				to {
-					transform: translateY(0);
-					opacity: 1;
-				}
-			}
-			
-			@keyframes fade_in {
-				from {
-					opacity: 0;
-				}
-				to {
-					opacity: 1;
-				}
-			}
-			
-    		.slide-in {
-				animation: 1s ease-out 3s 1 slide_from_bottom;
-				animation-fill-mode: both;
-    		}
-			
-			.fade-in {
-				animation: 1s ease-out 2s 1 fade_in;
-				animation-fill-mode: both;
-			}
-			
-			.typewriter {	
-				overflow: hidden;
-				white-space: nowrap;
-				letter-spacing: .05em;
-				animation: typing 3.5s steps(9, end);
-			}
-			
-			.left {
-				top: 0;
-				bottom: 0;
-				left: 0;
-				right: auto;
-			}
-			
-			.green {
-				background-color: #69D99F;
-			}
-			
-			.grey {
-				background-color: #66757F;
-			}
-			
-			a {
-				color: #66D696;
-			}
+    		
     	</style>
 	</head>
-	<body class="grey" >
-	    <div class="jumbotron green" >
+	<body>
+	    <div class="jumbotron" >
 	      <div class="container">
-	        <h1 style="font-size: 70px;" id="animate" ><span style="display: none;" >A</span></h1>
-	        <h2 style="font-size: 35px;" class="fade-in left" >Luca Bertozzi</h2>
+	        <h1><span style="font-size: 70px;" id="animation1" ><span style="visibility: hidden;" >A</span></span></h1>
+	        <h2><span style="font-size: 35px; opacity: 0;" id="animation2" >Luca Bertozzi</span></h2>
 	      </div>
 	    </div>
 
-	    <div class="container" >
-		    <div class="row slide-in">
+	    <div class="container">
+		    <div class="row">
 			    <div class="col-md-6">
 			        <h2><span class="glyphicon glyphicon-console" ></span> whoami</h2>
 			        <p>I'm a <span class="age" ></span>-years-old Italian guy. I'm interested in Science and Technology, in particular on GitHub I'll push my Computer Science and Electronics projects. I'm a big fan of Open Source and Free Software. I usually use Ubuntu or other GNU/Linux distributions</p>
@@ -95,7 +41,7 @@
 	      	<br/>
 	      	<br/>
 	      	<br/>
-	      	<div class="row slide-in" >
+	      	<div class="row" >
 	      		<div class="col-md-4" ></div>
 	      		<div class="col-md-4" style="text-align: center;" >
 	      			<a href="https://github.com/ekardnam" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> GitHub</a>
@@ -117,32 +63,57 @@
     		for (var i = 0; i <  elements.length; i++) {
     			elements[i].innerHTML = (year - birthYear);
     		}
-			
-			//animation code
-			var write = "ekardnam";
-			var h1 = document.getElementById("animate");
-			var i = 0;
-			var b = true;
-    		var animation = function() {
-    			if (i <= write.length) {
-    				h1.innerHTML = write.substring(0, i) + "_";
-    				i++;
-    				window.setTimeout(animation, 200);
-    			} else {
-					if (b) {
-						h1.innerHTML = write + "_";
-					} else {
-						h1.innerHTML = write;
-					}
-					b = !b;
-					window.setTimeout(animation, 500)
-    			}
-    		}
-			
-			animation();
     	</script>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     	<script src="js/bootstrap.min.js"></script>
+    	<script>
+		//stupid animation code lol
+    		//animations
+    		var animation1Text = "ekardnam";
+    		var animation1 = document.getElementById("animation1");
+    		var animation2 = document.getElementById("animation2");
+    		var i = 0;
+    		var c = true;
+    		var o  = 0;
+    		var s = 0.01;
+    		var writeWait = 200;
+    		var cursorWait = 500;
+    		var fadeWait = 10;
+    		var a1 = function() {
+    			if (i <= animation1Text.length) {
+    				animation1.innerHTML = animation1Text.substring(0, i) + "_";
+    				i++;
+    				window.setTimeout(a1, writeWait);
+    			} else {
+    				a2();
+    				b1();
+    			}
+    		}
+    		var b1 = function() {
+				if (c) {
+    				animation1.innerHTML = animation1Text + "_";
+    			} else {
+    				animation1.innerHTML = animation1Text;
+    				}
+    			c = !c;
+    			window.setTimeout(b1, cursorWait);
+    		}
+    		var a2 = function() {
+    			animation2.style.opacity = o;
+    			o += s;
+    			if (o < 1) {
+    				window.setTimeout(a2, fadeWait);
+    			}
+    		}
+    		window.setTimeout(a1, writeWait);
+    		//screen compatibility
+    		var screenW = screen.width;
+    		var screenH = screen.height;
+    		if (screenW <= 640) {
+    			animation1.style.fontSize = "50px";
+    			animation2.style.fontSize = "30px";
+    		}
+    	</script>
 	</body>
 </html>
