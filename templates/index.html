@@ -45,12 +45,12 @@
       		<br/>
       		<div class="row slide-in">
       			<h2><span class="glyphicon glyphicon-console" ></span> blog</h2>
-      			
+      			{% for post in posts %}
 
       			<hr/>
-      			<a href="posts/13-01-2019-introducing-the-blog.html" style="font-size: 20px; font-color: #005544;"  >Introducing the blog</a><span> by ekardnam on 13-01-2019</span><br/><hr/>
+      			<a href="posts/{{ post.get_link() }}.html" style="font-size: 20px; font-color: #005544;"  >{{ post.title }}</a><span> by {{post.author}} on {{post.date}}</span><br/><hr/>
 
-      			
+      			{% endfor %}
 
       		</div>
       		<div class="row slide-in" >

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>ekardnam - Luca Bertozzi</title>
+
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+    	<!--[if lt IE 9]>
+     		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      	<![endif]-->
+
+      	<link href="../css/my.css" rel="stylesheet" >
+      	<link href="../css/code.css" rel="stylesheet" >
+      </head>
+      <body class="grey" >
+      	<div class="jumbotron green white-border" >
+      		<div class="container">
+      			<img class="img-circle logo" src="../logo.jpg"/>
+      			<h1 id="animate" class="nick" ><span style="display: none;" >A</span></h1>
+      			<h2 class="fade-in left name" >Luca Bertozzi</h2>
+      		</div>
+      	</div>
+
+      	<div class="container" >
+
+      		<h1>Introducing the blog</h1>
+      		<h3>by  ekardnam on 13-01-2019</h3>
+      		<br/>
+      		<a href="../index.html" >Back</a>
+      		<br/><br/>
+
+      		<p>Hi everyone, this is my first blog post, wow!</p>
+<p>In this post I just wanna talk a little about the very minimalistic static blog system I ended up programming for this site.</p>
+<p>I was trying with Jekyll before I decided to code my own, but as I already have most of my website already setted up, it ended up being a bit difficult integrating that with the Jekyll stuff. I then thought of maybe using something external like WordPress, but I then relized I prefer keeping everything in just one place.</p>
+<p>So the final idea was to write a very simple and minimalistic program that would let me add blog posts as simple JSON metadata and MarkDown files and that it would compile this files into HTML pages.
+An 80-lines Python script ended up doing all I needed, without having the hassle of learning Jekyll and making it integrate seemlessly with the site I already had, plus this little code is all mine meaning I can modify and add features fastly whenever I want.</p>
+<p>Here is the snippet of the program that does all the magic:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">jinja2</span> <span class="kn">import</span> <span class="n">Environment</span><span class="p">,</span> <span class="n">FileSystemLoader</span><span class="p">,</span> <span class="n">select_autoescape</span>
+<span class="kn">import</span> <span class="nn">codecs</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">markdown</span>
+
+<span class="k">class</span> <span class="nc">TemplateEngine</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">(</span>
+            <span class="n">loader</span> <span class="o">=</span> <span class="n">FileSystemLoader</span><span class="p">(</span><span class="s2">&quot;templates&quot;</span><span class="p">),</span>
+            <span class="n">autoescape</span> <span class="o">=</span> <span class="n">select_autoescape</span><span class="p">([])</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">PostLoader</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span>
+
+    <span class="k">def</span> <span class="nf">load_posts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">posts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nb">file</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nb">file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+                <span class="n">post_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+                <span class="n">posts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Post</span><span class="p">(</span><span class="n">post_data</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">],</span> <span class="n">post_data</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="n">post_data</span><span class="p">[</span><span class="s2">&quot;content_file&quot;</span><span class="p">],</span> <span class="n">post_data</span><span class="p">[</span><span class="s2">&quot;author&quot;</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="n">posts</span>
+
+<span class="k">class</span> <span class="nc">Post</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">content_md_filename</span><span class="p">,</span> <span class="n">author</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content_md_filename</span> <span class="o">=</span> <span class="n">content_md_filename</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">author</span> <span class="o">=</span> <span class="n">author</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_content</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">load_content</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">content_md</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content_md_filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;utf8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">md_file</span><span class="p">:</span>
+            <span class="n">content_md</span> <span class="o">=</span> <span class="n">md_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content_html</span> <span class="o">=</span> <span class="n">markdown</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="n">content_md</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_link</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">PostCompiler</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">,</span> <span class="n">template_engine</span><span class="p">,</span> <span class="n">post_template_name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">template_engine</span> <span class="o">=</span> <span class="n">template_engine</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">post_template</span> <span class="o">=</span> <span class="n">template_engine</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="n">post_template_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">compile_post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">post</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">post</span><span class="o">.</span><span class="n">get_link</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="s2">&quot;utf8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">post_template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">post</span> <span class="o">=</span> <span class="n">post</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">template_engine</span> <span class="o">=</span> <span class="n">TemplateEngine</span><span class="p">()</span>
+    <span class="n">index_template</span> <span class="o">=</span> <span class="n">template_engine</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s2">&quot;index.html&quot;</span><span class="p">)</span>
+
+    <span class="n">post_loader</span> <span class="o">=</span> <span class="n">PostLoader</span><span class="p">(</span><span class="s2">&quot;_posts&quot;</span><span class="p">)</span>
+    <span class="n">posts</span> <span class="o">=</span> <span class="n">post_loader</span><span class="o">.</span><span class="n">load_posts</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;index.html&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="s2">&quot;utf8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">index_file</span><span class="p">:</span>
+        <span class="n">index_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">index_template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">posts</span> <span class="o">=</span> <span class="n">posts</span><span class="p">))</span>
+
+    <span class="n">post_compiler</span> <span class="o">=</span> <span class="n">PostCompiler</span><span class="p">(</span><span class="s2">&quot;posts&quot;</span><span class="p">,</span> <span class="n">template_engine</span><span class="p">,</span> <span class="s2">&quot;post.html&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">posts</span><span class="p">:</span>
+        <span class="n">post_compiler</span><span class="o">.</span><span class="n">compile_post</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>Every blog post is divided into a metadata part stored in a JSON file and the actual content file, stored as a MarkDown markup file. This makes post readable also on GitHub plus it makes it easy for me to write posts.</p>
+<p>So I'm just a call on that Python little boy and some git magic away from making loads of cool posts!</p>
+
+      		<div class="row slide-in" >
+      			<div class="col-md-4" ></div>
+      			<div class="col-md-4" style="text-align: center;" >
+      				<a href="https://github.com/ekardnam" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> GitHub</a>
+      				<a href="https://twitter.com/ekardnam_" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> Twitter</a>
+      				<a href="https://t.me/ekardnam" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> Telegram</a>
+      				<a href="http://pgp.mit.edu/pks/lookup?op=get&search=0x4C087AD5174FBD8B" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> PGP</a>
+      			</div>
+      		</div>
+      		<hr />
+      		<footer>
+      			<p>&copy; 2018 Luca Bertozzi</p>
+      		</footer>
+      	</div> 
+
+      	<script>
+			//animation code
+			var write = "ekardnam's blog";
+			var h1 = document.getElementById("animate");
+			var i = 0;
+			var b = true;
+			var animation = function() {
+				if (i <= write.length) {
+					h1.innerHTML = write.substring(0, i) + "_";
+					i++;
+					window.setTimeout(animation, 200);
+				} else {
+					if (b) {
+						h1.innerHTML = write + "_";
+					} else {
+						h1.innerHTML = write;
+					}
+					b = !b;
+					window.setTimeout(animation, 500)
+				}
+			}
+			animation();
+		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+		<script src="../js/bootstrap.min.js"></script>
+	</body>
+	</html>
