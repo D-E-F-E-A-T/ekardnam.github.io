@@ -8,6 +8,7 @@ import codecs
 import os
 import json
 import markdown
+from datetime import datetime
 
 class TemplateEngine:
 	def __init__(self):
@@ -39,6 +40,7 @@ class Post:
 	def __init__(self, title, date, content_md_filename, author):
 		self.title = title
 		self.date = date
+		self.datetime = datetime.strptime(self.date, "%d-%m-%Y")
 		self.content_md_filename = content_md_filename
 		self.author = author
 		self.load_content()
@@ -47,7 +49,7 @@ class Post:
 		content_md = ""
 		with codecs.open(self.content_md_filename, "r", "utf8") as md_file:
 			content_md = md_file.read()
-		self.content_html = markdown.markdown(content_md, extensions=["codehilite"])
+		self.content_html = markdown.markdown(content_md, extensions=["codehilite", "mdx_math"])
 
 	def get_link(self):
 		words = self.title.lower().split(" ")
@@ -66,12 +68,17 @@ class PostCompiler:
 if __name__ == "__main__":
 	template_engine = TemplateEngine()
 	index_template = template_engine.get_template("index.html")
+	archives_template = template_engine.get_template("archives.html")
 
 	post_loader = PostLoader("_posts")
 	posts = post_loader.load_posts()
+	posts.sort(key=lambda post: post.datetime, reverse=True)
 
 	with codecs.open("index.html", "w", "utf8") as index_file:
-		index_file.write(index_template.render(posts = posts))
+		index_file.write(index_template.render(posts = posts[:3]))
+
+	with codecs.open("archives.html", "w", "utf8") as archives_file:
+		archives_file.write(archives_template.render(posts = posts))
 
 	post_compiler = PostCompiler("posts", template_engine, "post.html")
 

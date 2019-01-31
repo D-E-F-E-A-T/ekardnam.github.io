@@ -96,7 +96,7 @@
 }
 
 a {
-	/*color: #66D696;*/
+	font-weight: bold;
 }
 
 @media only screen and (max-width: 768px) {
