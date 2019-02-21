@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>ekardnam - Luca Bertozzi</title>
+
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+    	<!--[if lt IE 9]>
+     		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      	<![endif]-->
+
+      	<link href="../css/my.css" rel="stylesheet" >
+      	<link href="../css/code.css" rel="stylesheet" >
+</head>
+      <body class="grey" >
+      	<div class="jumbotron green white-border" >
+      		<div class="container">
+      			<img class="img-circle logo" src="../logo.jpg"/>
+      			<h1 id="animate" class="nick" ><span style="display: none;" >A</span></h1>
+      			<h2 class="fade-in left name" >Luca Bertozzi</h2>
+      		</div>
+      	</div>
+
+      	<div class="container" >
+
+      		<h1>OPSEC thoughts</h1>
+      		<h3>by  ekardnam on 21-02-2019</h3>
+      		<br/>
+      		<a href="../index.html" >Back</a>
+      		<br/><br/>
+
+      		<p>Yeah reader, I know I had promised a post about convolutions last time, but be patient, it's in my TODO list okay?</p>
+<p>So I'm here talking about OPSEC and not convolutions, but why? I recently read about a onion website named "Russian Market" being exposed in a tweet by <a href="https://twitter.com/ydklijnsma">@ydklijnsma</a> and thought I could write something. I'm not gonna talk of the "server side" stuff thought, so if you are a illegal drug market owner and wanna know how to not be catched by the FBI, then this is not the post for you.</p>
+<p>I wanna talk about what OPSEC is and give some very basic advices on how to be <em>a bit</em> more anonymous while using TOR.</p>
+<p>OPSEC stands for OPeration SECurity and it's the process of protection of single pieces of information that, brought together could make a bigger picture on a certain situation or person. OPSEC is all about avoiding people being able to connect those peices of information.</p>
+<p>Let's make an example in the TOR context: let's say someone is using an anonymous identity on an IRC network with the nickname Skill3dHAXORX and also a have a social media profile with his name, surname and all sort of personal data. Let's say Skill3dHAXORX is a very bad guy who does steal credit card information and banking data thru malware and phishing and the police have been looking for him for so long, but he uses TOR so he feels safe and anonymous.
+Police have been looking at the logs on the servers owned by Skill3dHAX0RX, but just connection from TOR exit nodes are present and can't make a clue. At the same time police log in the IRC channel that Skill3dHAXORX and his companions are writing and uses some social engineering to look like a trustworth blackhat who wants to make loads of money with Skill3dHAXORX and his friends.
+After time talking police notices that Skill3dHAXORX uses a very unusual catchphrase when he gets angry at someone, let's say he shouts "FCK U STUPID DUMB VELOCIRAPTOR". Police looks on social media for people who use this kind of phrase and along with info they gathered by talking to Skill3dHAXORX they identify some social media profiles that can match the info they have.
+In the morning Skill3dHAXORX finds the cops at home and they find out compromising stuff on his laptop, busted.</p>
+<p>The story was very stupid and unrealistic, but you can notice how a single catchphrase can get you deanonymized. Some little information brought together can get you busted.</p>
+<p>NEVER EVER user catchphrases, change your way of talking every time you can, never use always same emojis, all of this can get you deanonymized.</p>
+<p>Another important thing is NEVER EVER give out personal information via TOR, use a different browser than your usual when using TOR as cookies can be used to deanonymize you and do not login to personal accounts while using TOR.</p>
+<p>Keep your sensitive data in an encrypted partition on your drive so it's safe.</p>
+<p>Be careful on what goes thru TOR and what does not, take a look at my project <a href="https://git.lattuga.net/ekardnam/anonymize.sh">anonymize.sh</a>.</p>
+<p>Have common sense first and then learn all the computer science behind TOR so you can know what can be used to deanonymize you.</p>
+<p>ALWAYS USE HTTPS while using TOR, loads of exit nodes are injecting malicious JavaScript in webpages or malicious code in executable you download thru TOR, that can be an exposure to deanonymization.</p>
+<p>NEVER EVER TORRENT THRU TOR torrent and TOR do not really work good together, don't mix them.</p>
+<p>USE COMMON SENSE, don't send a mail with terrorist alert to your town's major from you town hall's public wifi thru TOR as a joke. Take a book about good jokes and think, you are gonna be the only one using TOR in the day the mail was sent on the hall's wifi, wouldn't they notice?</p>
+
+      		<div class="row slide-in" >
+      			<div class="col-md-4" ></div>
+      			<div class="col-md-4" style="text-align: center;" >
+      				<a href="https://github.com/ekardnam" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> GitHub</a>
+      				<a href="https://twitter.com/ekardnam_" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> Twitter</a>
+      				<a href="https://t.me/ekardnam" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> Telegram</a>
+      				<a href="http://pgp.mit.edu/pks/lookup?op=get&search=0x4C087AD5174FBD8B" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> PGP</a>
+      			</div>
+      		</div>
+      		<hr />
+      		<footer>
+      			<p>&copy; 2018 Luca Bertozzi</p>
+      		</footer>
+      	</div> 
+
+            <script type="text/x-mathjax-config">
+                  MathJax.Hub.Config({
+                  config: ["MMLorHTML.js"],
+                  jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+                  extensions: ["MathMenu.js", "MathZoom.js"]
+            });
+            </script>
+
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js"></script>
+
+      	<script>
+			//animation code
+			var write = "ekardnam's blog";
+			var h1 = document.getElementById("animate");
+			var i = 0;
+			var b = true;
+			var animation = function() {
+				if (i <= write.length) {
+					h1.innerHTML = write.substring(0, i) + "_";
+					i++;
+					window.setTimeout(animation, 200);
+				} else {
+					if (b) {
+						h1.innerHTML = write + "_";
+					} else {
+						h1.innerHTML = write;
+					}
+					b = !b;
+					window.setTimeout(animation, 500)
+				}
+			}
+			animation();
+		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+		<script src="../js/bootstrap.min.js"></script>
+	</body>
+	</html>
