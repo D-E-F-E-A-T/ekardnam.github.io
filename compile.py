@@ -9,6 +9,7 @@ import os
 import json
 import markdown
 from datetime import datetime
+import PyRSS2Gen
 
 class TemplateEngine:
 	def __init__(self):
@@ -49,6 +50,7 @@ class Post:
 		content_md = ""
 		with codecs.open(self.content_md_filename, "r", "utf8") as md_file:
 			content_md = md_file.read()
+		self.content_md = content_md
 		self.content_html = markdown.markdown(content_md, extensions=["codehilite", "mdx_math"])
 
 	def get_link(self):
@@ -81,6 +83,23 @@ if __name__ == "__main__":
 		archives_file.write(archives_template.render(posts = posts))
 
 	post_compiler = PostCompiler("posts", template_engine, "post.html")
+
+	rss = PyRSS2Gen.RSS2(
+		title = "ekardnam's blog",
+		link = "https://ekardnam.github.io",
+		description = "Latest posts from ekardnam's blog",
+		lastBuildDate = datetime.now(),
+		items = [PyRSS2Gen.RSSItem(
+			title = p.title,
+			link = "https://ekardnam.github.io/posts/{}".format(p.get_link()),
+			description = p.content_md[:20],
+			guid = PyRSS2Gen.Guid("https://ekardnam.github.io/posts/{}".format(p.get_link())),
+			pubDate = p.datetime
+		) for p in posts]
+	)
+
+	with open("rss.xml", "w") as f:
+		rss.write_xml(f)
 
 	for post in posts:
 		post_compiler.compile_post(post)
