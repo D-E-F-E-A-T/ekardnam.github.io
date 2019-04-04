@@ -57,6 +57,9 @@ class Post:
 		words = self.title.lower().split(" ")
 		return self.date + "-" + "-".join(words)
 
+	def get_full_link(self):
+		return "https://ekardnam.github.io/posts/{}.html".format(self.get_link())
+
 class PostCompiler:
 	def __init__(self, folder, template_engine, post_template_name):
 		self.folder = folder
@@ -91,9 +94,9 @@ if __name__ == "__main__":
 		lastBuildDate = datetime.now(),
 		items = [PyRSS2Gen.RSSItem(
 			title = p.title,
-			link = "https://ekardnam.github.io/posts/{}".format(p.get_link()),
+			link = p.get_full_link(),
 			description = p.content_md[:20],
-			guid = PyRSS2Gen.Guid("https://ekardnam.github.io/posts/{}".format(p.get_link())),
+			guid = PyRSS2Gen.Guid(p.get_full_link()),
 			pubDate = p.datetime
 		) for p in posts]
 	)
