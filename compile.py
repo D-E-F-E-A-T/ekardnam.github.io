@@ -1,6 +1,5 @@
 """
 	This program compiles the static blog
-
 """
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -9,6 +8,7 @@ import os
 import json
 import markdown
 from datetime import datetime
+import urllib
 import PyRSS2Gen
 
 class TemplateEngine:
@@ -55,7 +55,7 @@ class Post:
 
 	def get_link(self):
 		words = self.title.lower().split(" ")
-		return self.date + "-" + "-".join(words)
+		return urllib.quote(self.date + "-" + "-".join(words))
 
 	def get_full_link(self):
 		return "https://ekardnam.github.io/posts/{}.html".format(self.get_link())

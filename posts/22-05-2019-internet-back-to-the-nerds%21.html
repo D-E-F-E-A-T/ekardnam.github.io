@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>ekardnam - Luca Bertozzi</title>
+
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+    	<!--[if lt IE 9]>
+     		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      	<![endif]-->
+
+      	<link href="../css/my.css" rel="stylesheet" >
+      	<link href="../css/code.css" rel="stylesheet" >
+</head>
+      <body class="grey" >
+      	<div class="jumbotron green white-border" >
+      		<div class="container">
+      			<img class="img-circle logo" src="../logo.jpg"/>
+      			<h1 id="animate" class="nick" ><span style="display: none;" >A</span></h1>
+      			<h2 class="fade-in left name" >Luca Bertozzi</h2>
+      		</div>
+      	</div>
+
+      	<div class="container" >
+
+      		<h1>Internet back to the nerds!</h1>
+      		<h3>by  ekardnam on 22-05-2019</h3>
+      		<br/>
+      		<a href="../index.html" >Back</a>
+      		<br/><br/>
+
+      		<p>Hey nerd fellows, happy to see you. I was recently involved in discussions about the internet and such stuff and I soon became pretty nostalgic of how the internet was when I started exploring it.</p>
+<p>My adventure on the internet started when I was about 12-years-old, so in about 2011. I wish I could have seen how the internet was in the 90s and in the early years 2000, but still in 2011 internet was fairly different than today.
+At those time I used to spend my time on forums about videogames and programming, it was a time when you were considered a weirdo for spending time online and having more fun with computer stuff than with actual people.
+At the same time, as being active on the internet was not something very popular among teens, you ended up knowing people that similarly to you had problems in social relationship, but were very passionate about things like Science and computers.
+And really internet was an elite thing. Not in a bad way, but in such a way that noobs where trolled so hard that they either went away from the net or began learning and joined the elite.
+And it was good because on the net those sociable and popular bullies had no power at all, because they had not the kind of mentality to survive on the internet. They were usually used to have everything they wanted on asking to someone, while on the internet if you wanted others to do your work they would end up telling you to RTFM and do it yourself. Internet was a place for independent learners who wanted to share knowledge between them. If you just wanted just to receive from the internet without giving you would end up being isolated and trolled.</p>
+<p>Internet was the society of nerds and social networks such as Facebook and Instagram took that kind of society away from us nerds. Now if you don't use social networks you are considered that kind of antisocial weirdo, now being on the internet is necessary to be socially accepted. And the todays weirdos don't have a safe place on the internet, because the community of nerds like forums and IRCs became less popular and newer weirdos probably don't even know about the little communities that still exist.</p>
+<p>And with the internet becoming more popular it bacame also more user-friendly wich means that if before you had to know some basic computer science at least, now you can be completely ignorant about it.</p>
+<p>The internet is nerd's belonging, take it back!</p>
+
+      		<div class="row slide-in" >
+      			<div class="col-md-4" ></div>
+      			<div class="col-md-4" style="text-align: center;" >
+      				<a href="https://github.com/ekardnam" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> GitHub</a>
+      				<a href="https://twitter.com/ekardnam_" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> Twitter</a>
+      				<a href="https://t.me/ekardnam" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> Telegram</a>
+      				<a href="http://pool.sks-keyservers.net/pks/lookup?op=get&search=0x4C087AD5174FBD8B" ><span class="glyphicon glyphicon-menu-right" ></span> PGP</a>
+      			</div>
+      		</div>
+      		<hr />
+      		<footer>
+      			<p>&copy; 2018 Luca Bertozzi</p>
+      		</footer>
+      	</div> 
+
+            <script type="text/x-mathjax-config">
+                  MathJax.Hub.Config({
+                  config: ["MMLorHTML.js"],
+                  jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+                  extensions: ["MathMenu.js", "MathZoom.js"]
+            });
+            </script>
+
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js"></script>
+
+      	<script>
+			//animation code
+			var write = "ekardnam's blog";
+			var h1 = document.getElementById("animate");
+			var i = 0;
+			var b = true;
+			var animation = function() {
+				if (i <= write.length) {
+					h1.innerHTML = write.substring(0, i) + "_";
+					i++;
+					window.setTimeout(animation, 200);
+				} else {
+					if (b) {
+						h1.innerHTML = write + "_";
+					} else {
+						h1.innerHTML = write;
+					}
+					b = !b;
+					window.setTimeout(animation, 500)
+				}
+			}
+			animation();
+		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+		<script src="../js/bootstrap.min.js"></script>
+	</body>
+	</html>
