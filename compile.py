@@ -55,10 +55,13 @@ class Post:
 
 	def get_link(self):
 		words = self.title.lower().split(" ")
-		return urllib.quote(self.date + "-" + "-".join(words))
+		return self.date + "-" + "-".join(words)
+
+	def get_link_url(self):
+		return urllib.quote(self.get_link())
 
 	def get_full_link(self):
-		return "https://ekardnam.github.io/posts/{}.html".format(self.get_link())
+		return "https://ekardnam.github.io/posts/{}.html".format(self.get_link_url())
 
 class PostCompiler:
 	def __init__(self, folder, template_engine, post_template_name):
