@@ -58,7 +58,7 @@ class Post:
 		return self.date + "-" + "-".join(words)
 
 	def get_link_url(self):
-		return urllib.quote(self.get_link())
+		return urllib.parse.quote(self.get_link())
 
 	def get_full_link(self):
 		return "https://ekardnam.github.io/posts/{}.html".format(self.get_link_url())
