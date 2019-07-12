@@ -110,7 +110,8 @@ I decided to install the game to get also the original DLL and see what's differ
 
 Strings of the original DLL were completely different obviously, but seems all pretty normal as the DLL is cracked.
 
-After going with some dynamic analysis on the SKIDROW.exe binary I understood that my initial thought that it would load procedures from the ubiorbit DLL was wrong. ALso, given the DLL purpose it makes sense that it is not loading procedures from there.
+After going with some dynamic analysis on the SKIDROW.exe binary I understood that my initial thought that it would load procedures from the ubiorbit DLL was wrong. Also, given the DLL purpose it makes sense that it is not loading procedures from there.
+
 By setting a breakpoint at GetProcAddress and watching the stack I could see which procedures it is loading that are not marked as imported in the PE file.
 
 ![](/images/skidrowdbg-1.png)

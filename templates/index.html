@@ -33,17 +33,20 @@
       			<div class="col-md-6">
       				<h2><span class="glyphicon glyphicon-console" ></span> whoami</h2>
       				<p class="english" >I'm a <span class="age" ></span>-years-old Italian guy. I'm interested in Science and Technology. I study Physics at University of Bologna. I'm a Free Software and InfoSec enthusiast and a convinced anarcho-communist</p>
-      				<p class="italian" >Sono un <span class="age" ></span>enne Italiano. Mi interesso di Scienza e Tecnologia. Studio Fisica all'Università di Bologna. Sono appassionato di Software Libero e InfoSec e sono un anarco-comunista convinto</p>
-      			</div>
+							<p class="english" >I'm a proud Arch Linux user and I'm getting more and more interested in the Fediverse. In my free time I develop Free Software and try to hack things!</p>
+
+							<p class="italian" >Sono un <span class="age" ></span>enne Italiano. Mi interesso di Scienza e Tecnologia. Studio Fisica all'Università di Bologna. Sono appassionato di Software Libero e InfoSec e sono un anarco-comunista convinto</p>
+							<p class="italian" >Sono un utente fiero di Arch Linux e mi interface sempre più al Fediverso. Nel tempo libero sviluppo Software Libero e provo a smanettare con tutto quello che mi capita a tiro!</p>
+						</div>
       			<div class="col-md-6">
       				<h2><span class="glyphicon glyphicon-console" ></span> contacts</h2>
-      				<p><a href="mailto:lucabertozzi.pub@gmail.com" >lucabertozzi.pub@gmail.com general purpose email</a></p>
-                              <p><a href="mailto:ekardnam@autistici.org" >ekardnam@autistici.org for computer science and activism related stuff</a></p>
-                              <p><a href="mailto:ekarndam@autistici.org" >ekarndam@autistici.org just same email as above the above is an alias to this</a></p>
-                              <p><a href="mailto:luca.bertozzi11@studio.unibo.it" >luca.bertozzi11@studio.unibo.it for university and academical related stuff</a></p>
-      				<p><a href="https://twitter.com/ekardnam_" >@ekardnam_ on Twitter!</a></p>
-      				<p><a href="https://t.me/ekardnam">@ekardnam on Telegram!</a></p>
-                              <p><a href="https://mastodon.bida.im/@ekardnam">@ekardnam@mastodon.bida.im on bida.im Mastodon instance!</a></p>
+      				<p><a href="mailto:lucabertozzi.pub@gmail.com" target="_blank" >lucabertozzi.pub@gmail.com general purpose email</a></p>
+              <p><a href="mailto:ekardnam@autistici.org" target="_blank" >ekardnam@autistici.org for computer science and activism related stuff</a></p>
+              <p><a href="mailto:ekarndam@autistici.org" target="_blank" >ekarndam@autistici.org just same email as above the above is an alias to this</a></p>
+              <p><a href="mailto:luca.bertozzi11@studio.unibo.it" target="_blank" >luca.bertozzi11@studio.unibo.it for university and academical related stuff</a></p>
+							<p><a href="https://mastodon.bida.im/@ekardnam" target="_blank">@ekardnam@mastodon.bida.im on bida.im Mastodon instance!</a></p>
+      				<p><a href="https://twitter.com/ekardnam_" target="_blank" >@ekardnam_ on Twitter!</a></p>
+      				<p><a href="https://t.me/ekardnam" target="_blank" >@ekardnam on Telegram!</a></p>
       			</div>
       		</div>
       		<br/>
@@ -58,22 +61,9 @@
 
                         <a href="archives.html" >Blog archives</a>
 
-      		</div>
-      		<div class="row slide-in" >
-      			<div class="col-md-4" ></div>
-      			<div class="col-md-4" style="text-align: center;" >
-      				<a href="https://github.com/ekardnam" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> GitHub</a>
-      				<a href="https://twitter.com/ekardnam_" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> Twitter</a>
-      				<a href="https://t.me/ekardnam" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> Telegram</a>
-      				<a href="http://pool.sks-keyservers.net/pks/lookup?op=get&search=0x4C087AD5174FBD8B" class="btn btn-default" ><span class="glyphicon glyphicon-menu-right" ></span> PGP</a>
-      			</div>
-      		</div>
-      		<hr />
+      		{% include "footer.html" %}
 
-      		<footer>
-      			<p>&copy; 2018 Luca Bertozzi</p>
-      		</footer>
-      	</div> 
+      	</div>
 
       	<script>
       		var birthYear = 1999;
@@ -112,15 +102,15 @@
 					window.setTimeout(animation, 500)
 				}
 			}
-			
+
 			var languages = ["english", "italian"]
 			var language = 0;
-			
+
 			function set_lang(lang) {
 				language = lang;
 				update();
 			}
-			
+
 			function update() {
 				var buttons = document.getElementsByClassName("lang-button");
 				for (var l = 0; l < buttons.length; l++) {
@@ -135,7 +125,7 @@
 					}
 				}
 			}
-			
+
 			update();
 			animation();
 		</script>
